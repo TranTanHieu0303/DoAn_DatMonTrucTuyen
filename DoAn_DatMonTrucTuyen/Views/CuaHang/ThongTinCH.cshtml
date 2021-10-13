@@ -1,0 +1,59 @@
+﻿@using DoAn_DatMonTrucTuyen.Models;
+@{
+    ViewBag.Title = "ThongTinCH";
+    Layout = "~/Views/Shared/_LayoutCuaHang.cshtml";
+}
+@model CuaHang
+@if (Request.HttpMethod == "POST")
+{
+    if(ViewBag.tb)
+    {
+            <script type="text/javascript">
+                confirm('Cập Nhật thông tin thành công')
+            </script>
+    }
+    else
+    {
+        <script type="text/javascript">
+            confirm('Cập Nhật thông tin không thành công')
+            </script>
+    }
+}
+<div class="container" style="margin:auto;text-align:center;background-color:white;min-height:300px">
+<h1 class="w-100">THÔNG TIN CỬA HÀNG</h1>
+    <form action="/CuaHang/ThongTinCH_Sua" method="post" enctype="multipart/form-data">
+    <table class="w-100">
+        <tr>
+            <td style="text-align:right">Mã Của Hàng</td>
+            <td style="text-align:left"><input type="text" name="txtMa" value="@Model.MaCH" readonly="true" /></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Tên Cửa Hàng:</td>
+            <td style="text-align:left"><input type="text" name="txtTen" value="@Model.TenCH" /></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Địa Chỉ:</td>
+            <td style="text-align:left"><input type="text" name="txtDiaChi" value="@Model.DiaChi"/></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Số Điện Thoại:</td>
+            <td style="text-align:left"><input type="tel" name="txtSDT" value="@Model.Sdt"/></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Hình Ảnh:</td>
+            <td style="text-align:left"><input type="file" name="fup" /></td>
+        </tr>
+        <tr>
+            <td style="text-align:right"></td>
+            <td style="text-align:left">
+                <img src="~/Content/HinhAnh/@Model.HinhAnh" style="width:200px;height:200px;border-radius:100px"/> Ảnh Hiện Tại
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:right"><input type="submit"  value="Lưu"/></td>
+            <td style="text-align:left"><a class="btn" href="@Url.Action("TrangChu", "Home")" >Quay Lại</a></td>
+        </tr>
+    </table>
+    </form>
+
+</div>

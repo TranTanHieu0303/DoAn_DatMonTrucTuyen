@@ -1,0 +1,68 @@
+﻿@using DoAn_DatMonTrucTuyen.Models;
+@{
+    
+    ViewBag.Title = "ChiTiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    
+}
+@model SanPham
+
+<div class="container w-100">
+    <div class="row" style="background-color:white">
+        <h2 class="w-100" style="border-bottom: solid 1px #808080">@ViewBag.c.TenCH</h2>
+        <div class="col-md-3">
+            <img src="~/Content/HinhAnh/@Model.HinhAnh" style="width:240px;height:200px;border-radius:10px" />
+        </div>
+        <div class="col-md-9">
+            
+                <h1>@Model.TenSP</h1>
+                <p>Địa Chỉ: @ViewBag.c.DiaChi</p>
+                <p>Mô Tả: @Model.MoTa</p>
+                <p>Giá: <span style="color:red;font-weight:bold">@Model.DonGia VND</span></p>
+            <p style="text-align:right">
+                <a href="@Url.Action("ThemGioHang", "DatHang", new { ma = Model.MaSP })"><img src="~/Content/HinhAnh/Dat_Mon.png" style="width:150px;height:50px;border-radius:10px" /></a>
+            </p>
+                
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px">
+        <div class="col-md-6" style="padding-left:30px;background-color:white">
+            <h2>Thực Đơn</h2>
+            
+            @foreach (LoaiSP loai in ViewData["LoaiSP"] as List<LoaiSP>)
+            {
+                 <div class="row w-100">
+                     <h4 class="w-100" style="border-bottom:solid 1px #808080">@loai.TenLoai</h4>
+                     @foreach (SanPham sp in ViewBag.lst)
+                     {
+                         if(sp.MaLoai==loai.MaLoai)
+                         {
+                             <a class="container" href="@Url.Action("ChiTiet", "Home", new { ma = sp.MaSP }) " style="text-decoration:none">
+                          <div class="row w-100 mt-2" style="border-bottom:solid 1px #808080;padding-bottom:5px">
+                              
+                              <div class="col-md-3">
+                                  <img src="~/Content/HinhAnh/@sp.HinhAnh" style="width:100px;height:50px; border-radius:5px;"/>
+                              </div>
+                              <div class="col-md-6">
+                                  <p>@sp.TenSP</p>
+                              </div>
+                              <div class="col-md-3">
+                                  <p>@sp.DonGia VND</p>
+                              </div>
+                              
+                          </div>
+                                 </a>
+                         }
+                     }
+                 </div>
+            }
+            
+        
+    </div>
+        <div class="col-md-6" style="padding-left:20px;background-color:white">
+            <h2 class="w-100" style="border-bottom:solid 1px #fff">Giỏ Hàng</h2>
+            @Html.Action("XemGioHangPhu","DatHang")
+        </div>
+</div>
+</div>

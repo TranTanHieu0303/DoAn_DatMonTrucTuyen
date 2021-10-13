@@ -1,0 +1,65 @@
+﻿@using DoAn_DatMonTrucTuyen.Models
+@{
+    ViewBag.Title = "XemGioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model GioHang
+@if (Request.HttpMethod == "POST")
+{
+    if (ViewBag.tb)
+    {
+        <script type="text/javascript">
+            confirm('Đặt Hàng Thành Công')
+        </script> 
+    }
+    else
+    {
+        <script type="text/javascript">
+            confirm('Đặt Hàng không Thành Công')
+        </script> 
+    }
+}
+@if (Model != null)
+{
+<div class="container"style="background-color:white;min-height:500px">
+    <div class="row" >
+        <h1 class="w-100" style="text-align:center">Thông Tin Giỏ Hàng</h1>
+        <table class="table ">
+            <tr>
+                <td>Hình Ảnh</td>
+                <td>Tên Món</td>
+                <td>Số lượng</td>
+                <td>Giá</td>
+                <td>Thành Tiền</td>
+            </tr>
+            @foreach (SanPhamMua sp in @Model.lstSP)
+            {
+                <tr>
+                <td><img src="~/Content/HinhAnh/@sp.sHinhAnh" style="width:150px ; height:75px ; border-radius:5px"  /></td>
+                <td>@sp.sTenSP</td>
+                <td>
+                    <a href="@Url.Action("Thaydoi", "DatHang", new { ma=sp.sMaSanPham ,dk = 0})"><img src="~/Content/HinhAnh/Button Remove.png" style="width:30px;height:30px" /></a>
+                    <span style="font-size:15px;font-weight:bold;border:solid 1px #808080;border-radius:2px"> @sp.iSoLuong </span>
+                    <a href="@Url.Action("Thaydoi", "DatHang", new { ma=sp.sMaSanPham ,dk = 1})"><img src="~/Content/HinhAnh/Button White Add.png" style="width:30px;height:30px" /></a>
+                </td>
+                <td>@sp.dDonGia VND</td>
+                <td>@sp.ThanhTien VND</td>
+            </tr>
+            }
+        </table>
+    </div>
+    <div class="row" style="font-size:20px ; font-weight:bold">
+        <div class="col-md-6">
+            <p> Tổng Tiền:</p>
+        </div>
+        <div class="col-md-6" style="text-align:right">
+            <p>@Model.TongThanhTien() VND</p>
+        </div>
+    </div>
+    <a href="@Url.Action("ThanhToan", "DatHang")"><p class="w-100"style="background-color:#f00;font-weight:bold;text-align:center;font-size:25px;border-radius:2px;">Thanh Toán</p></a>
+</div>
+}
+else
+{
+    <h1>Giỏi Hàng Rỗng !!!</h1>
+}

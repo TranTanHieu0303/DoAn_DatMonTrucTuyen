@@ -1,0 +1,84 @@
+﻿@using DoAn_DatMonTrucTuyen.Models;
+@{
+    ViewBag.Title = "ThongTinTaiKhoan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model KhachHang
+@if (Request.HttpMethod == "POST")
+{
+    if(ViewBag.tb)
+    {
+            <script type="text/javascript">
+                confirm('Cập Nhật thông tin thành công')
+            </script>
+    }
+    else
+    {
+        <script type="text/javascript">
+            confirm('Cập Nhật thông tin không thành công')
+            </script>
+    }
+
+}
+<div class="container" style="margin:auto;text-align:center;background-color:white;min-height:300px">
+<h1 class="w-100">THÔNG TIN TÀI KHOẢN</h1>
+    <form action="/KhachHang/ThongTinTaiKhoan" method="post" enctype="multipart/form-data">
+    <table class="w-100">
+        <tr>
+            <td style="text-align:right">Mã tài khoản</td>
+            <td style="text-align:left"><input type="text" name="txtMa" value="@Model.MaKH" readonly="true" /></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Tên Đăng Nhập:</td>
+            <td style="text-align:left"><input type="text" name="txtTen" value="@Model.Usename"/></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Mật Khẩu:</td>
+            <td style="text-align:left"><input type="password" name="txtMK" value="@Model.Pass" /></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Họ và Tên:</td>
+            <td style="text-align:left"><input type="text" name="txtHoTen" value="@Model.HoTen" /></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Giới Tính:</td>
+            <td style="text-align:left">
+                @if (Model.GioiTinh == "Nam")
+                {
+                    <label class="radio-inline"><input type="radio" name="rdGioiTinh"  value="1" checked>Nam</label>
+                    <label class="radio-inline"><input type="radio" name="rdGioiTinh" value="0">Nữ</label> 
+                }
+                else
+                {
+                    <label class="radio-inline"><input type="radio" name="rdGioiTinh"  value="1" >Nam</label>
+                    <label class="radio-inline"><input type="radio" name="rdGioiTinh" value="0" checked>Nữ</label> 
+                }
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Địa Chỉ:</td>
+            <td style="text-align:left"><input type="text" name="txtDiaChi" value="@Model.DiaChi"/></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Số Điện Thoại:</td>
+            <td style="text-align:left"><input type="tel" name="txtSDT" value="@Model.Sdt"/></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Hình Ảnh:</td>
+            <td style="text-align:left"><input type="file" name="fup" /></td>
+        </tr>
+        <tr>
+            <td style="text-align:right"></td>
+            <td style="text-align:left">
+                <img src="~/Content/HinhAnh/@Model.HinhAnh" style="width:200px;height:200px;border-radius:100px"/> Ảnh Hiện Tại
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:right"><input type="submit"  value="Luu"/></td>
+            <td style="text-align:left"><a class="btn" href="@Url.Action("TrangChu", "Home")" >Quay Lại</a></td>
+        </tr>
+    </table>
+    </form>
+
+</div>

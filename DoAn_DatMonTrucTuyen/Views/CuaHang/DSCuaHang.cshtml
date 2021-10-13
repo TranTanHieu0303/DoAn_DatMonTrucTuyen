@@ -1,0 +1,26 @@
+﻿@using DoAn_DatMonTrucTuyen.Models;
+@model List<CuaHang>
+@{
+    ViewBag.Title = "DSCuaHang";
+}
+@if (Model==null||Model.Count == 0)
+{
+    <div style="background-color:white;min-height:500px">
+        <h2>Bạn chưa có cửa hàng cho riêng mình ,Hãy tạo một cửa hàng mới</h2>
+    <button type="button" id="btn_Them" class="btn" data-toggle="modal" data-target="#Them" onclick="open_Add()">Thêm mới</button>
+    </div>
+     
+}
+else
+{
+    <div style="background-color:white;min-height:500px">
+    @foreach (CuaHang ch in Model)
+    {
+        <div>
+            <label>@ch.TenCH</label>
+        </div> 
+    }
+    </div>
+}
+
+

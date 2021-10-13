@@ -1,0 +1,124 @@
+﻿@using DoAn_DatMonTrucTuyen.Models;
+@{
+    ViewBag.Title = "ThucDon";
+    Layout = "~/Views/Shared/_LayoutCuaHang.cshtml";
+}
+@model List<SanPham>
+<div class="container-fluid" style="padding-left:30px;background-color:white">
+            <h2>Thực Đơn</h2>
+    <button type="button" id="btn_Them" class="btn" data-toggle="modal" data-target="#Them" onclick="open_Add()">Thêm mới</button>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Hình Ảnh
+                        </th>
+                        <th>
+                            Tên Món
+                        </th>
+                        <th>
+                            Mô Tả
+                        </th>
+                        <th>
+                            Tình Trạng
+                        </th>
+                        <th>
+                            Giá Bán
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                    @foreach (LoaiSP loai in ViewData["Loai"] as List<LoaiSP>)
+                    {
+                        <tr>
+                            <th colspan="6">
+                                @loai.TenLoai
+                            </th>
+                        </tr>
+                        foreach (SanPham sp in Model)
+                        {
+                            if (sp.MaLoai == loai.MaLoai)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="~/Content/HinhAnh/@sp.HinhAnh" style="width:100px;height:50px; border-radius:5px;"/>
+                                    </td>
+                                    <td>
+                                        <p>@sp.TenSP</p>
+                                    </td>
+                                    <td>
+                                        <p>@sp.MoTa</p>
+                                    </td>
+                                    <td>
+                                        <p>@sp.TinhTrang</p>
+                                    </td>
+                                    <td>
+                                        <p>@sp.DonGia VND</p>
+                                    </td>
+                                    <td>
+                                        <a  class="btn " href="@Url.Action("Chitiet", "CuaHang", new { masp = sp.MaSP })">Update</a>
+                                        <a   class="btn " href="@Url.Action("Xoa", "CuaHang", new { masp = sp.MaSP })">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+            </table>        
+     
+        
+    </div>
+<div class="modal" id="Them" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Thêm Mới</h3>
+                <button class="close" type="button" id="iclose" data-dismiss="modal">X</button>
+            </div>
+            <div class="modal-body">
+                    <form action="~/CuaHang/ThemMon?ma=@Model[0].MaCH" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="ID">ID</label>
+                            <input type="text" id="id" class="form-control" placeholder="Mã Sản Phẩm"  />
+                        </div>
+                        <div class="form-group">
+                            <label for="Name">Tên Món Ăn</label>
+                            <input type="text" name="TenSP" class="form-control" placeholder="Tên Sản Phẩm"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="Age">Mô Tả</label>
+                            <input type="text" name="MoTa" class="form-control" placeholder="Loại Sản Phẩm"/>
+                        </div>
+                        <div class="form-group">
+                            <label >Loại Món Ăn</label>
+                            <select name="Loai">
+                                <option value="LSP01">Đồ Ăn</option>
+                                <option value="LSP02">Đồ uống</option>
+                                <option value="LSP03">Vĩa Hè</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="State">Giá Bán</label>
+                            <input type="number" name="Gia" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="State">Tình Trạng</label>
+                            <input type="text" name="tinhtrang" class="form-control" placeholder="Tình Trạng"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="State">Hình Ảnh</label>
+                            <input type="file" name="HinhAnh" />
+                        </div>
+                        <input type="submit" value="ADD" id="btn_Add" class="btn btn-primary" />
+                        
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            <div class="model-footer">
+                @*<input type="submit" class="btn btn-primary" id="btn_Add" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/bootstrap/bootstrap/js/Food.js"></script>

@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Request.HttpMethod == "POST")
+{
+            <script type="text/javascript">
+                confirm('Đăng ký không thành công')
+            </script>
+    
+   
+}
+<div class="container" style="margin:auto;text-align:center;background-color:white;min-height:300px">
+<h1 class="w-100">ĐĂNG KÝ TÀI KHOẢN</h1>
+    <form action="/KhachHang/DangKy" method="post" enctype="multipart/form-data">
+    <table class="w-100">
+        <tr>
+            <td style="text-align:right">Tên Đăng Nhập:</td>
+            <td style="text-align:left"><input type="text" name="txtTen" /></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Mật Khẩu:</td>
+            <td style="text-align:left"><input type="password" name="txtMK" /></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Họ và Tên:</td>
+            <td style="text-align:left"><input type="text" name="txtHoTen" /></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Giới Tính:</td>
+            <td style="text-align:left">
+                
+                
+                <label class="radio-inline"><input type="radio" name="rdGioiTinh"  value="1" checked>Nam</label>
+                <label class="radio-inline"><input type="radio" name="rdGioiTinh" value="0">Nữ</label>
+
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Địa Chỉ:</td>
+            <td style="text-align:left"><input type="text" name="txtDiaChi" /></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Số Điện Thoại:</td>
+            <td style="text-align:left"><input type="tel" name="txtSDT" /></td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Hình Ảnh:</td>
+            <td style="text-align:left"><input type="file" name="HinhAnh" />
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:right"></td>
+            <td style="text-align:left"><input type="submit" value="Đăng Ký" /></td>
+        </tr>
+    </table>
+        
+    </form>
+
+</div>
+
+

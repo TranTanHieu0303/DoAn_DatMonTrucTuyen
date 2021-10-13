@@ -1,0 +1,76 @@
+﻿@using DoAn_DatMonTrucTuyen.Models
+@{
+    ViewBag.Title = "ThanhToan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    KhachHang a = ViewBag.k as KhachHang;
+}
+
+@model GioHang
+<div class="container" style="background-color:white;min-height:500px;margin:auto;text-align:center">
+<form action="/DatHang/LuuDonHang" method="post">
+<h2 class="w-100">THÔNG TIN ĐẶT HÀNG</h2>
+    <table  style="display:inline;font-size:19px"class="text-left w-80">
+        <tr>
+            <td>Họ và Tên: </td>
+            <td>@a.HoTen</td>
+        </tr>
+        <tr>
+            <td>Điện Thoại:</td>
+            <td>@a.Sdt</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-left">Địa CHỉ: @a.DiaChi</td>
+        </tr>
+        <tr>
+            <td>Ngày Đặt: </td>
+            <td>@DateTime.Now.ToShortDateString()</td>
+        </tr>
+        <tr>
+            <td>Ngày Giao: </td>
+            <td><input type="date" name="txtDate"/></td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-center">
+                <table>
+                    <tr><td colspan="4" class="text-danger">Thông Tin Đơn Hàng</td> </tr>
+                    <tr>
+                        <td> Mã Món Ăn</td>
+                        <td> Tên Món</td>
+                        <td> Số Lượng</td>
+                        <td> Đơn Giá</td>
+                        <td> Thành Tiền</td>
+                    </tr>
+                    @foreach (SanPhamMua item in Model.lstSP)
+                    { 
+                    <tr>
+                        <td> @item.sMaSanPham</td>
+                        <td> @item.sTenSP</td>
+                        <td> @item.iSoLuong</td>
+                        <td> @item.dDonGia </td>
+                        <td> @item.ThanhTien</td>
+                    </tr>
+                    }
+                    <tr>
+                        <td >Tổng Số Lượng Món Đặt:</td>
+                        <td > @Model.TongSL()</td>
+                    </tr>
+                    <tr>
+                        <td >Tổng Tiền : </td>
+                        <td >@Model.TongThanhTien() VND</td>
+                    </tr>
+                </table>
+            </td>
+
+
+        </tr>
+        <tr>
+            <td><input type="submit" value="Đồng Ý" /></td>
+        </tr>
+    </table>
+
+</form>
+</div>

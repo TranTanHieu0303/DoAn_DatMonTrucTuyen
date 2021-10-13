@@ -1,0 +1,35 @@
+﻿@using DoAn_DatMonTrucTuyen.Models;
+@model GioHang
+@if(Model!=null)
+{
+<div class="container">
+    <div class="row">
+        <table class="table ">
+            <tr>
+                <td>Tên Món</td>
+                <td>Số lượng</td>
+                <td>Giá</td>
+                <td>Thành Tiền</td>
+            </tr>
+            @foreach(SanPhamMua sp in @Model.lstSP )
+            {
+                <tr>
+                <td>@sp.sTenSP</td>
+                <td>@sp.iSoLuong</td>
+                <td>@sp.dDonGia VND</td>
+                <td>@sp.ThanhTien VND</td>
+            </tr>
+            }
+        </table>
+    </div>
+    <div class="row" style="font-size:20px ; font-weight:bold">
+        <div class="col-md-6">
+            <p> Tổng Tiền:</p>
+        </div>
+        <div class="col-md-6" style="text-align:right">
+            <p>@Model.TongThanhTien() VND</p>
+        </div>
+    </div>
+    <a href="@Url.Action("ThanhToan","DatHang")"><p class="w-100"style="background-color:#f00;font-weight:bold;text-align:center;font-size:25px;border-radius:2px;">Thanh Toán</p></a>
+</div>
+}

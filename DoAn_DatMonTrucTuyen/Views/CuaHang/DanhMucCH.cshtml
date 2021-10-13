@@ -1,0 +1,26 @@
+﻿@using DoAn_DatMonTrucTuyen.Models;
+@model List<CuaHang>
+
+<ul class="nav flex-column w-100" style="background-color:white" >
+    <li class="nav-item ">
+        <p> <img src="~/Content/HinhAnh/icon_DM.png" style="width:40px;height:40px"/>DANH SÁCH CỬA HÀNG</p>
+        <ul class="nav flex-column ">
+            @foreach (CuaHang c in Model)
+            {
+                <li class="nav-item DanhMucCH " >
+                    <nav class="navbar">
+                        <div class="dropdown w-100">
+                           <p class="dropdowwn-toggle" data-toggle="dropdown" id="CuaHang" aria-haspopup="true" aria-expanded="false">@c.TenCH</p>
+                           <div class="dropdown-menu" aria-labelledby="CuaHang">
+                               <a class="dropdown-item" href="@Url.Action("ThongTinCH_ma", "CuaHang", new { mach=c.MaCH})">Thông Tin Cửa Hàng</a>     
+                               <a class="dropdown-item" href="@Url.Action("ThucDon", "CuaHang", new { mach=c.MaCH})">Thực Đơn</a>
+                           </div>
+                        </div>
+                    </nav>
+               <script src="~/Content/bootstrap/bootstrap/js/jquery-3.3.1.min.js"></script>
+               <script src="~/Content/bootstrap/bootstrap/js/bootstrap.min.js"></script>
+                </li> 
+            }
+        </ul>
+    </li>
+</ul>
